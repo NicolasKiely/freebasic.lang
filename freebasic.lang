@@ -30,7 +30,7 @@
 <language id="freebasic" _name="FreeBASIC" version="2.0" _section="Sources">
   <metadata>
     <property name="mimetypes">text/x-freebasic</property>
-    <property name="globs">*.bas</property>
+    <property name="globs">*.bas;*.bi</property>
     <property name="line-comment-start">'</property>
     <property name="block-comment-start">/'</property>
     <property name="block-comment-end">'/</property>
@@ -42,6 +42,8 @@
     <style id="preprocessor" _name="Preprocessor" map-to="def:preprocessor"/>
     <style id="keyword" _name="Keyword" map-to="def:keyword"/>
     <style id="type" _name="Data Type" map-to="def:type"/>
+    <style id="operator" _name="Operator" map-to="def:operator"/>
+    <style id="storage-class" _name="Storage class" map-to="def:type"/>
     <style id="special-constant" _name="Special constant" map-to="def:special-constant"/>
     <style id="boolean" _name="Boolean value" map-to="def:boolean"/>
   </styles>
@@ -78,103 +80,137 @@
     </context>
  
     <context id="preprocessor" style-ref="preprocessor" end-at-line-end="true">
-      <start extended="true">
-        ^\s*#\s*
-        (define|undef|if(n?def)?|else|elif|end if|line|error|macro|end macro)
-        \b
-      </start>
+      <start>^#</start>
+      <end>$</end>
       <include>
         <context ref="line-comment"/>
       </include>
     </context>
- 
-    <context id="keywords" style-ref="keyword">
-      <keyword>alias</keyword>
-      <keyword>and</keyword>
-      <keyword>andalso</keyword>
-      <keyword>ansi</keyword>
-      <keyword>as</keyword>
-      <keyword>binary</keyword>
-      <keyword>byte</keyword>
-      <keyword>byref</keyword>
-      <keyword>byval</keyword>
-      <keyword>call</keyword>
-      <keyword>case</keyword>
-      <keyword>cbyte</keyword>
-      <keyword>cdbl</keyword>
-      <keyword>cint</keyword>
-      <keyword>class</keyword>
-      <keyword>clng</keyword>
-      <keyword>const</keyword>
-      <keyword>cshort</keyword>
-      <keyword>csng</keyword>
-      <keyword>declare</keyword>
-      <keyword>dim</keyword>
-      <keyword>do</keyword>
-      <keyword>double</keyword>
-      <keyword>else</keyword>
-      <keyword>elseif</keyword>
-      <keyword>end</keyword>
-      <keyword>enum</keyword>
+    
+    <context id="built-in" style-ref="keyword">
+      <keyword>close</keyword>
+      <keyword>delete</keyword>
+      <keyword>draw</keyword>
       <keyword>erase</keyword>
-      <keyword>error</keyword>
-      <keyword>event</keyword>
-      <keyword>exit</keyword>
-      <keyword>explicit</keyword>
-      <keyword>extern</keyword>
-      <keyword>for</keyword>
-      <keyword>friend</keyword>
-      <keyword>function</keyword>
       <keyword>get</keyword>
-      <keyword>goto</keyword>
-      <keyword>if</keyword>
-      <keyword>integer</keyword>
-      <keyword>is</keyword>
-      <keyword>let</keyword>
-      <keyword>lib</keyword>
-      <keyword>long</keyword>
-      <keyword>loop</keyword>
-      <keyword>mod</keyword>
-      <keyword>namespace</keyword>
+      <keyword>input</keyword>
+      <keyword>line</keyword>
       <keyword>new</keyword>
-      <keyword>next</keyword>
-      <keyword>not</keyword>
+      <keyword>output</keyword>
+      <keyword>print</keyword>
+      <keyword>put</keyword>
+      <keyword>sleep</keyword>
+    </context>
+    
+    <context id="primitives" style-ref="type">
+      <keyword>any</keyword>
+      <keyword>byte</keyword>
+      <keyword>double</keyword>
+      <keyword>integer</keyword>
+      <keyword>longint</keyword>
       <keyword>object</keyword>
-      <keyword>on</keyword>
-      <keyword>option</keyword>
-      <keyword>optional</keyword>
-      <keyword>or</keyword>
-      <keyword>orelse</keyword>
-      <keyword>preserve</keyword>
+      <keyword>pointer</keyword>
+      <keyword>ptr</keyword>
+      <keyword>short</keyword>
+      <keyword>single</keyword>
+      <keyword>string</keyword>
+      <keyword>ubyte</keyword>
+      <keyword>uinteger</keyword>
+      <keyword>ulongint</keyword>
+      <keyword>ushort</keyword>
+      <keyword>wstring</keyword>
+      <keyword>zstring</keyword>
+    </context>
+    
+    <context id="storage-class" style-ref="storage-class">
+      <keyword>class</keyword>
+      <keyword>const</keyword>
+      <keyword>enum</keyword>
+      <keyword>extern</keyword>
+      <keyword>friend</keyword>
       <keyword>private</keyword>
       <keyword>property</keyword>
       <keyword>protected</keyword>
-      <keyword>ptr</keyword>
       <keyword>public</keyword>
+      <keyword>shared</keyword>
+      <keyword>static</keyword>
+      <keyword>type</keyword>
+    </context>
+    
+    <context id="flow-control" style-ref="keyword">
+      <keyword>case</keyword>
+      <keyword>continue</keyword>
+      <keyword>do</keyword>
+      <keyword>else</keyword>
+      <keyword>elseif</keyword>
+      <keyword>end</keyword>
+      <keyword>endif</keyword>
+      <keyword>exit</keyword>
+      <keyword>for</keyword>
+      <keyword>goto</keyword>
+      <keyword>if</keyword>
+      <keyword>is</keyword>
+      <keyword>loop</keyword>
+      <keyword>next</keyword>
+      <keyword>select</keyword>
+      <keyword>step</keyword>
+      <keyword>then</keyword>
+      <keyword>to</keyword>
+      <keyword>until</keyword>
+      <keyword>wend</keyword>
+      <keyword>while</keyword>
+    </context>
+    
+    <context id="subroutine" style-ref="keyword">
+      <keyword>byref</keyword>
+      <keyword>byval</keyword>
+      <keyword>call</keyword>
+      <keyword>constructor</keyword>
+      <keyword>declare</keyword>
+      <keyword>destructor</keyword>
+      <keyword>function</keyword>
+      <keyword>return</keyword>
+      <keyword>sub</keyword>
+    </context>
+    
+    <context id="operator" style-ref="operator">
+      <keyword>and</keyword>
+      <keyword>andalso</keyword>
+      <keyword>mod</keyword>
+      <keyword>not</keyword>
+      <keyword>or</keyword>
+      <keyword>orelse</keyword>
+      <keyword>xor</keyword>
+    </context>
+ 
+    <context id="keywords" style-ref="keyword">
+      <keyword>alias</keyword>
+      <keyword>ansi</keyword>
+      <keyword>as</keyword>
+      <keyword>binary</keyword>
+      <keyword>cbyte</keyword>
+      <keyword>cdbl</keyword>
+      <keyword>cint</keyword>
+      <keyword>clng</keyword>
+      <keyword>cshort</keyword>
+      <keyword>csng</keyword>
+      <keyword>dim</keyword>
+      <keyword>error</keyword>
+      <keyword>event</keyword>
+      <keyword>explicit</keyword>
+      <keyword>let</keyword>
+      <keyword>lib</keyword>
+      <keyword>namespace</keyword>
+      <keyword>on</keyword>
+      <keyword>option</keyword>
+      <keyword>optional</keyword>
+      <keyword>preserve</keyword>
       <keyword>redim</keyword>
       <keyword>rem</keyword>
       <keyword>resume</keyword>
-      <keyword>return</keyword>
-      <keyword>select</keyword>
-      <keyword>shared</keyword>
-      <keyword>short</keyword>
-      <keyword>single</keyword>
       <keyword>sizeof</keyword>
-      <keyword>static</keyword>
-      <keyword>step</keyword>
       <keyword>stop</keyword>
-      <keyword>string</keyword>
-      <keyword>sub</keyword>
-      <keyword>then</keyword>
-      <keyword>to</keyword>
-      <keyword>typeof</keyword>
-      <keyword>until</keyword>
-      <keyword>while</keyword>
       <keyword>with</keyword>
-      <keyword>xor</keyword>
-      <keyword>null</keyword>
-      <keyword>true</keyword>
-      <keyword>false</keyword>
     </context>
  
     <context id="freebasic" class="no-spell-check">
@@ -184,6 +220,12 @@
         <context ref="old-style-comment"/>
         <context ref="string"/>
         <context ref="preprocessor"/>
+        <context ref="built-in"/>
+        <context ref="primitives"/>
+        <context ref="storage-class"/>
+        <context ref="flow-control"/>
+        <context ref="subroutine"/>
+        <context ref="operator"/>
         <context ref="keywords"/>
       </include>
     </context>
