@@ -1,4 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of GtkSourceView
+
+ Author: John Luke <jluke@cfl.rr.com>, Daniel C. Klauer, Nicolas Kiely
+ Copyright (C) 2004 John Luke <jluke@cfl.rr.com>
+ Copyright (C) 2014 Daniel C. Klauer
+ Copyright (C) 2014 Nicolas Kiely <mitchell3141@gmail.com>
+
+ GtkSourceView is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+
+ GtkSourceView is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+
+ You should have received a copy of the GNU Lesser General Public
+ License along with this library; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+-->
  
 <!-- Place this file in ~/.local/share/gtksourceview-2.0/language-specs/ -->
  
